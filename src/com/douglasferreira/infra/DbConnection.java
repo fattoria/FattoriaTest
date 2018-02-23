@@ -1,39 +1,69 @@
 package com.douglasferreira.infra;
 
-import java.sql.*;
+import org.hibernate.HibernateException;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.cfg.Configuration;
 
 public final class DbConnection {
-
-	private static DbConnection currentInstance;
 	
-	private final String connectionURL = "jdbc:mysql://drflab.c0uktfaczuj2.sa-east-1.rds.amazonaws.com/DRFDB";
-	private final String user = "sa";
-	private final String password = "drffattoria";
-	private final String driver = "com.mysql.jdbc.Driver";
-	private Connection currentConnection;
+	public static SessionFactory factory; 
+	private static DbConnection instance;
 		
-	private DbConnection() throws Exception {
-		Class.forName(driver);
-		currentConnection = DriverManager.getConnection(connectionURL, user, password);
-	}
-	
-	public static DbConnection GetInstance() throws Exception {
-	
-		if(currentInstance == null) {
-			
-			DbConnection _instance = new DbConnection();
-			currentInstance = _instance;
-			return currentInstance;
+	private DbConnection() {
+		
+		try {
+			factory = new Configuration().configure("/com/douglasferreira/infra/hibernate.cfg.xml").buildSessionFactory();
 		}
-		else {
-			return currentInstance;
+		catch(Throwable ex){
+			throw new ExceptionInInitializerError(ex);
 		}
 		
 	}
 	
-	public Connection getCurrentConnection() {
-		return currentConnection;
-}
+	public static DbConnection GetInstance() {
 		
+		if(instance == null){
+			instance = new DbConnection();
+		}
+		return instance;
+	}
+	
+	public void CreateObject(Object obj) { 
+		
+		Session session = factory.openSession();
+		Transaction tx = null;
+		
+		try {
+			tx = session.beginTransaction();
+			session.save(obj);
+			tx.commit();
+		}
+		catch (HibernateException e) {
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		
+	}
+	
+	public void GetAllObjects() {
+		
+	}
+	
+	public void GetObject() {
+		
+	}
+	
+	public void UpdateObject() {
+		
+	}
+	
+	public void DeleteObject() {
+		
+	}
 	
 }

@@ -1,26 +1,34 @@
 <%@ page import="com.douglasferreira.infra.*" %>
+<%@ page import="com.douglasferreira.domain.*" %>
 <%@ page import="java.io.*" %>
 
 <html>
 <head>
 	<title>Fattoria Teste - CRUD</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-
-	
 </head>
 
 <body style="margin: 20px">
 
 	<% 
+
+		DbConnection connection = null;
+	
 		try {
-			DbConnection currentConnection = DbConnection.GetInstance();
+			
+			connection = DbConnection.GetInstance();
+			Produto p = new Produto("Chinelo Havaianas", 25, 40);
+			connection.CreateObject(p);
 			out.println("Connected to MySQL at AWS RDS Service");
-			//out.println(currentConnection.getCurrentConnection().getCatalog());
-								
+											
 		}
 		catch (Exception ex) {
 			out.println("Connection attempt to MySQL at AWS RDS Service has failed!");
 		}
+		finally {
+			//currentConnection.getCurrentConnection().close();
+		}
+	
 	%>
 	
 	<h1>Fattoria Teste - CRUD </h1>
@@ -33,7 +41,12 @@
 	</header>
 	
 	<section>
-		<h2>Lista de Produtos Cadastrados</h2>	
+		<h2>Lista de Produtos Cadastrados</h2>
+		<ul id="ProdutosId">
+		</ul>	
 	</section>
+	
+	<script src="index.js"></script>
+	
 </body>
 </html>

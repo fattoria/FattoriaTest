@@ -1,32 +1,39 @@
 package com.douglasferreira.domain;
 
 import java.util.Date;
-import java.util.UUID;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+@Entity
+@Table(name="Produtos")
 public class Produto {
 
-	private UUID id;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private int id;
 	private String name;
 	private int price;
+	private int amount;
 	private Date date;
 	
-	public Produto() {
-		generateNewId();
-	}
-	
-	public Produto(String name, int price) {
-		generateNewId();
+		
+	public Produto(String name, int price, int amount) {
 		setName(name);
 		setPrice(price);
+		setAmount(amount);
 		setDate(new Date());
+		
 	}
 		
-	public UUID getId() {
+	public int getId() {
 		return id;
 	}
-
-	private void generateNewId() {
-		id = UUID.randomUUID();
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getName() {
@@ -53,6 +60,12 @@ public class Produto {
 		this.date = date;
 	}
 
+	public int getAmount() {
+		return amount;
+	}
 
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	
 }

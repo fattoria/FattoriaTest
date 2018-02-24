@@ -22,9 +22,9 @@
 		try {
 			
 			connection = DbConnection.getInstance();
-			List products = connection.getAllProducts();
+			List productsList = connection.getAllProducts();
 			out.println("Connected to MySQL at AWS RDS Service");
-			session.setAttribute("productsList", products);
+			session.setAttribute("productsList", productsList);
 														
 		}
 		catch (Exception ex) {
@@ -49,6 +49,19 @@
 		<ul id="ProdutosId">
 		
 		</ul>
+		
+		<c:forEach items="${productsList}" var="product">
+			<ol>
+			    <li><c:out value=" ${product.name}"/>
+			      	<ul style="list-style-type:none;">
+				        <li>Preço: <c:out value="${product.price}"/></li>
+				     	<li>Quantidade em Estoque: <c:out value="${product.amount}"/></li>
+				        <li>Data de Cadastro: <c:out value="${product.date}"/></li>
+				        <li><button>Editar</button> <button>Excluir</button></li>
+			        </ul>
+		        </li>
+ 			 </ol>
+		</c:forEach>
 			
 	</section>
 			

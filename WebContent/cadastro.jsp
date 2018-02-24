@@ -2,6 +2,7 @@
 <head>
 	<title>Fattoria Teste - CRUD</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 
 <body style="margin: 20px">
@@ -17,7 +18,7 @@
 	<section>
 		<h2>Cadastro de Produtos</h2>
 		
-		<form action="${pageContext.request.contextPath}/crud" method="post">	
+		<form action="${pageContext.request.contextPath}/crud" method="post" id="cadastroForm">	
 			<label>Nome do Produto</label><br>
 			<input id="pName" name="pName" type="text" value="${ param.pName }"><br>
 			<label>Preço</label><br>
@@ -27,7 +28,8 @@
 			<input type="submit" value="Gravar">
 			<span class="success">${messages.success}</span>
 		</form>
-							
+					
 	</section>
+<!-- 	<script type="text/script" src="cadastro.js"></script> -->
 </body>
 </html>

@@ -1,3 +1,7 @@
+//$(document).ready(function(){
+//	$.get('get.jsp');
+//});
+
 function getAllProducts() {
 
     $.getJSON(apiUriGetAll)

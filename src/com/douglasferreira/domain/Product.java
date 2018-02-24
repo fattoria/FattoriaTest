@@ -9,7 +9,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="Produtos")
-public class Produto {
+public class Product {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -19,8 +19,11 @@ public class Produto {
 	private int amount;
 	private Date date;
 	
+	public Product() {
 		
-	public Produto(String name, int price, int amount) {
+	}
+		
+	public Product(String name, int price, int amount) {
 		setName(name);
 		setPrice(price);
 		setAmount(amount);

@@ -1,11 +1,17 @@
 package com.douglasferreira.infra;
 
+import com.douglasferreira.domain.*;
+
+import java.util.List;
+import java.util.Iterator;
+
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.hibernate.cfg.Configuration;
 
+//Singeton clas
 public final class DbConnection {
 	
 	public static SessionFactory factory; 
@@ -22,7 +28,7 @@ public final class DbConnection {
 		
 	}
 	
-	public static DbConnection GetInstance() {
+	public static DbConnection getInstance() {
 		
 		if(instance == null){
 			instance = new DbConnection();
@@ -30,7 +36,7 @@ public final class DbConnection {
 		return instance;
 	}
 	
-	public void CreateObject(Object obj) { 
+	public void createObject(Object obj) { 
 		
 		Session session = factory.openSession();
 		Transaction tx = null;
@@ -50,19 +56,63 @@ public final class DbConnection {
 		
 	}
 	
-	public void GetAllObjects() {
+	public List getAllProducts() {
+		
+		Session session = factory.openSession();
+		Transaction tx = null;
+		List products = null;
+		
+		try {
+			tx = session.beginTransaction();
+			products = session.createQuery("FROM Product").list();
+			tx.commit();				
+		}
+		catch(HibernateException e)
+		{
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
+		
+		return products;
 		
 	}
 	
-	public void GetObject() {
+	public List getAllObjects(String tableName) {
+		
+		Session session = factory.openSession();
+		Transaction tx = null;
+		List products = null;
+		
+		try {
+			tx = session.beginTransaction();
+			products = session.createQuery("FROM " + tableName).list();
+			tx.commit();				
+		}
+		catch(HibernateException e)
+		{
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+			
+		}
+		
+		return products;
+	}
+	
+	public void getObject() {
 		
 	}
 	
-	public void UpdateObject() {
+	public void updateObject() {
 		
 	}
 	
-	public void DeleteObject() {
+	public void deleteObject() {
 		
 	}
 	

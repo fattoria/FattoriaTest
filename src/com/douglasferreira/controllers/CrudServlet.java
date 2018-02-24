@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.douglasferreira.infra.*;
 import com.douglasferreira.domain.*;
 
-@WebServlet("/crud")
+@WebServlet("/cadastro")
 public class CrudServlet extends HttpServlet{
 	
     @Override
@@ -31,15 +31,18 @@ public class CrudServlet extends HttpServlet{
 		String pName = request.getParameter("pName");
 		if(pName == null || pName.trim().isEmpty()) {
 			messages.put("pName", "Insira o nome do produto");
-		}
+		} else {
 		
-		try {
-		DbConnection connection = DbConnection.getInstance();
-		Product p = new Product(request.getParameter("pName"), Float.parseFloat(request.getParameter("pPrice")), Integer.parseInt(request.getParameter("pAmount")));
-		connection.createObject(p);
-		}
-		catch (Exception ex) {
-			ex.printStackTrace();
+			try {
+				DbConnection connection = DbConnection.getInstance();
+				Product p = new Product(request.getParameter("pName"), Float.parseFloat(request.getParameter("pPrice")), Integer.parseInt(request.getParameter("pAmount")));
+				connection.createObject(p);
+				messages.put("success", "Produto gravado com sucesso!");
+			}
+			catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		
 		}
 		
 		request.getRequestDispatcher("cadastro.jsp").forward(request, response);

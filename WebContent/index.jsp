@@ -4,6 +4,8 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Iterator" %>
 
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <html>
 <head>
 	<title>Fattoria Teste - CRUD</title>
@@ -47,10 +49,6 @@
 		<ul id="ProdutosId">
 		
 		</ul>
-		
-		<script type="text/javascript">
-			var productList = <%= DbConnection.getInstance().getAllProducts() %>;
-		</script>
 			
 	</section>
 			

@@ -18,15 +18,15 @@
 	<section>
 		<h2>Cadastro de Produtos</h2>
 		
-		<form action="${pageContext.request.contextPath}/crud" method="post" id="cadastroForm">	
+		<form action="${pageContext.request.contextPath}/cadastro" method="post" id="cadastroForm">	
 			<label>Nome do Produto</label><br>
-			<input id="pName" name="pName" type="text" value="${ param.pName }"><br>
+			<input id="pName" name="pName" type="text" value="${ param.pName }"> <span class="alert" style="color:red;">${messages.pName} </span> <br>
 			<label>Preço</label><br>
 			<input id="pPrice" name="pPrice" type="number" step="any" min="0.01" value="${ param.pPrice }"><br>
 			<label>Quantidade</label><br>
 			<input id="pAmount" name="pAmount" type="number" min="1" value="${ param.pAmount }"><br><br>
-			<input type="submit" value="Gravar">
-			<span class="success">${messages.success}</span>
+			<input type="submit" value="Gravar"> <br>
+			<span class="success" style="color:green;">${messages.success}</span>
 		</form>
 					
 	</section>

@@ -44,8 +44,8 @@ public class CrudServlet extends HttpServlet{
 			}
 		
 		}
-		
-		request.getRequestDispatcher("cadastro.jsp").forward(request, response);
+				
+		request.getRequestDispatcher("index.jsp").forward(request, response);
 		
 	}
 	

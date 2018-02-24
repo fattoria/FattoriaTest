@@ -2,6 +2,7 @@
 <%@ page import="com.douglasferreira.domain.*" %>
 <%@ page import="java.io.*" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Iterator" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -44,23 +45,24 @@
 	</header>
 	
 	<section>
-		<h2>Lista de Produtos Cadastrados</h2>
-						
-		<ul id="ProdutosId">
-		
-		</ul>
-		
+		<h2>Lista de Produtos Cadastrados</h2>		
+	
 		<c:forEach items="${productsList}" var="product">
-			<ol>
+			<ul>
 			    <li><c:out value=" ${product.name}"/>
 			      	<ul style="list-style-type:none;">
-				        <li>Preço: <c:out value="${product.price}"/></li>
+				        <li>Preço: <c:out value="R$ ${product.price}"/></li>
 				     	<li>Quantidade em Estoque: <c:out value="${product.amount}"/></li>
-				        <li>Data de Cadastro: <c:out value="${product.date}"/></li>
-				        <li><button>Editar</button> <button>Excluir</button></li>
+				     	<li>Data de Cadastro: <c:out value="${product.date}"/> </li>
+				        <li> 
+				        
+				        <a href="editar.jsp?id=<c:out value="${product.id}"/>">Editar</a>
+				        <a href="delete.jsp?id=<c:out value="${product.id}"/>">Deletar</a>       
+			        
+				        </li>
 			        </ul>
 		        </li>
- 			 </ol>
+ 			 </ul>
 		</c:forEach>
 			
 	</section>

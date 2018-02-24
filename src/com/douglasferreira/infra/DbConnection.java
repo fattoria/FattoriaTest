@@ -104,16 +104,45 @@ public final class DbConnection {
 		return products;
 	}
 	
-	public void getObject() {
+	public void updateObject(int id) {
+		
+		Session session = factory.openSession();
+		Transaction tx = null;
+			
+		try {
+			tx = session.beginTransaction();
+			Product p = (Product)session.get(Product.class, id);
+			session.update(p);
+			tx.commit();				
+		}
+		catch(HibernateException e)
+		{
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
 		
 	}
 	
-	public void updateObject() {
-		
+	public void deleteObject(int id) {
+		Session session = factory.openSession();
+		Transaction tx = null;
+			
+		try {
+			tx = session.beginTransaction();
+			Product p = (Product)session.get(Product.class, id);
+			session.delete(p);
+			tx.commit();				
+		}
+		catch(HibernateException e)
+		{
+			if(tx != null) tx.rollback();
+			e.printStackTrace();
+		}
+		finally {
+			session.close();
+		}
 	}
-	
-	public void deleteObject() {
-		
-	}
-	
 }

@@ -13,16 +13,9 @@ $("#cadastroForm").submit(function( event ) {
 	        url:  $form.attr('action'),
 	        data: data,
 	        success: function (data) {
-	           //console.log("Hey, we got reply form java side, with following data: ");
-	           console.log(data);
-	
-	            // redirecting example..
-	           // if(data === "SUCCESS") {
-	
-	               window.location.replace("index.jsp");
-	
-	            //}
-	
+
+	        	//window.location.href("index.jsp");
+
 	        }
 	    });   
 }); 

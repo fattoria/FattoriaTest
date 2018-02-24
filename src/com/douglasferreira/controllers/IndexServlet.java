@@ -10,6 +10,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.douglasferreira.domain.Product;
+import com.douglasferreira.infra.DbConnection;
+
 @WebServlet("/index")
 public class IndexServlet extends HttpServlet {
 

@@ -35,7 +35,7 @@ public class CrudServlet extends HttpServlet{
 		
 		try {
 		DbConnection connection = DbConnection.getInstance();
-		Product p = new Product(request.getParameter("pName"), Integer.parseInt(request.getParameter("pPrice")), Integer.parseInt(request.getParameter("pAmount")));
+		Product p = new Product(request.getParameter("pName"), Float.parseFloat(request.getParameter("pPrice")), Integer.parseInt(request.getParameter("pAmount")));
 		connection.createObject(p);
 		}
 		catch (Exception ex) {

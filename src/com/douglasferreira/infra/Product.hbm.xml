@@ -11,7 +11,7 @@
       </id>
       
       <property name = "name" column = "Name" type = "string"/>
-      <property name = "price" column = "Price" type = "int"/>
+      <property name = "price" column = "Price" type = "float"/>
       <property name = "amount" column = "Amount" type = "int"/>
       <property name = "date" column = "Date" type = "date"/>
       

@@ -22,9 +22,9 @@
 			<label>Nome do Produto</label><br>
 			<input id="pName" name="pName" type="text" value="${ param.pName }"><br>
 			<label>Preço</label><br>
-			<input id="pPrice" name="pPrice" type="number" value="${ param.pPrice }"><br>
+			<input id="pPrice" name="pPrice" type="number" step="any" min="0.01" value="${ param.pPrice }"><br>
 			<label>Quantidade</label><br>
-			<input id="pAmount" name="pAmount" type="number" value="${ param.pAmount }"><br><br>
+			<input id="pAmount" name="pAmount" type="number" min="1" value="${ param.pAmount }"><br><br>
 			<input type="submit" value="Gravar">
 			<span class="success">${messages.success}</span>
 		</form>

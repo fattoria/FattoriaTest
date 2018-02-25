@@ -4,6 +4,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Date" %>
 
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
@@ -23,41 +24,57 @@
 			<li class="active"><a href="cadastro.jsp">Cadastrar produto</a></li>		
 		</ul>
 	</header>
-	
-	<% 
-
-		DbConnection connection = null;
-				
-		try {
 			
-			connection = DbConnection.getInstance();
-			
-			out.println("Connected to MySQL at AWS RDS Service");
-			session.setAttribute("productsList", productsList);
-														
-		}
-		catch (Exception ex) {
-			out.println("Connection attempt to MySQL at AWS RDS Service has failed!");
-			ex.printStackTrace();
-		}
-	
-	%>	
-		
 	<section>
 		<h2>Edição de Produto</h2>
 		
-		<form action="${pageContext.request.contextPath}/cadastro" method="post" id="cadastroForm">	
-			<label>Nome do Produto</label><br>
-			<input id="pName" name="pName" type="text" value="${ param.pName }"> <span class="alert" style="color:red;">${messages.pName} </span> <br>
-			<label>Preço</label><br>
-			<input id="pPrice" name="pPrice" type="number" step="any" min="0.01" value="${ param.pPrice }"><br>
-			<label>Quantidade</label><br>
-			<input id="pAmount" name="pAmount" type="number" min="1" value="${ param.pAmount }"><br><br>
-			<input type="submit" value="Gravar"> <br>
-			<span class="success" style="color:green;">${messages.success}</span>
-		</form>
+	
+		<label>Nome do Produto</label><br>
+		<input id="pName" name="pName" type="text" value="${ param.pName }"> <span class="alert" style="color:red;">${messages.pName} </span> <br>
+		<label>Preço</label><br>
+		<input id="pPrice" name="pPrice" type="number" step="any" min="0.01" value="${ param.pPrice }"><br>
+		<label>Quantidade</label><br>
+		<input id="pAmount" name="pAmount" type="number" min="1" value="${ param.pAmount }"><br>
+		<button onClick="save()">Salvar Alterações</button>	
+
+	
 					
 	</section>
-<!-- 	<script type="text/script" src="cadastro.js"></script> -->
+
+	<script type="text/javascript">
+	
+		var getUrlParameter = function getUrlParameter(sParam) {
+		    var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+		        sURLVariables = sPageURL.split('&'),
+		        sParameterName,
+		        i;
+	
+		    for (i = 0; i < sURLVariables.length; i++) {
+		        sParameterName = sURLVariables[i].split('=');
+	
+		        if (sParameterName[0] === sParam) {
+		            return sParameterName[1] === undefined ? true : sParameterName[1];
+		        }
+		    }
+		};
+		var pId = getUrlParameter('id');
+		var pName = getUrlParameter('name').trim();
+		var pPrice = getUrlParameter('price');
+		var pAmount = getUrlParameter('amount');
+		var pDate = getUrlParameter('date');
+		
+		$('#pName').val(pName);
+		$('#pPrice').val(pPrice);
+		$('#pAmount').val(pAmount);
+		
+		function save(){
+			var saveURI = 'editSave.jsp?id=' + pId + '&name=' + $('#pName').val() + '&price=' + $('#pPrice').val() +
+					'&amount=' + $('#pAmount').val() + '&date=' + pDate;
+			window.location.replace(saveURI);
+		}
+		
+		
+	</script>
+
 </body>
 </html>

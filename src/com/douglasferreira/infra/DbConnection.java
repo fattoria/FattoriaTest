@@ -79,7 +79,6 @@ public final class DbConnection {
 		return products;
 		
 	}
-	
 	public List getAllObjects(String tableName) {
 		
 		Session session = factory.openSession();
@@ -104,15 +103,16 @@ public final class DbConnection {
 		return products;
 	}
 	
-	public void updateObject(int id) {
+	public void updateObject(int id, Product obj) {
 		
 		Session session = factory.openSession();
 		Transaction tx = null;
 			
 		try {
 			tx = session.beginTransaction();
-			Product p = (Product)session.get(Product.class, id);
-			session.update(p);
+			Product pNew = obj;
+			pNew.setId(id);
+			session.update(pNew);
 			tx.commit();				
 		}
 		catch(HibernateException e)

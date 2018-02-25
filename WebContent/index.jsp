@@ -55,11 +55,10 @@
 				     	<li>Quantidade em Estoque: <c:out value="${product.amount}"/></li>
 				     	<li>Data de Cadastro: <c:out value="${product.date}"/> </li>
 				        <li> 
-				        
-				        <a href="editar.jsp?id=<c:out value="${product.id}"/>">Editar</a>
-				        <a href="delete.jsp?id=<c:out value="${product.id}"/>">Deletar</a>       
-			        
-				        </li>
+				        	<a href="edit.jsp?id=<c:out value="${product.id}"/>&name=<c:out value=" ${product.name}"/>
+				        	&price=<c:out value="${product.price}"/>&amount=<c:out value="${product.amount}"/>&date=<c:out value="${product.date}"/>">Editar</a>
+				        	<a href="delete.jsp?id=<c:out value="${product.id}"/>">Deletar</a>       
+			            </li>
 			        </ul>
 		        </li>
  			 </ul>
